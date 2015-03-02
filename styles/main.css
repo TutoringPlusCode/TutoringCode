@@ -48,8 +48,60 @@ p.centers-text span.center-block {
 .unicorn {
 	height:85px;
 	width:150px;
-	background: url('../assets/images/unicorn_sprite.png') -7 -15;
+	background: url('../assets/images/unicorn_sprite.png') 2 -18;
 	position:absolute;
 	bottom:0px;
 	left: calc(50% - 75px);
-};
+}
+
+.unicorn.reverse {
+	background: url('../assets/images/unicorn_reverse_sprite.png') -1438 -18;
+}
+
+.unicorn.running {
+	background: url('../assets/images/unicorn_running_sprite.png');
+	-webkit-animation-name: running;
+	-webkit-animation-duration: .7s;
+	-webkit-animation-timing-function: steps(8);
+	-webkit-animation-iteration-count: infinite;
+}
+
+.unicorn.running.reverse {
+	background: url('../assets/images/unicorn_running_reverse_sprite.png');
+	-webkit-animation-direction: reverse;
+}
+
+@-webkit-keyframes running {
+	from {
+		background-position: -39px 0px;
+	}
+	to {
+		background-position: -1357px 0px;
+	}
+}
+@-moz-keyframes running {
+	from {
+		background-position: -39px 0px;
+	}
+	to {
+		background-position: -1357px 0px;
+	}
+}
+
+@-o-keyframes running {
+	from {
+		background-position: -39px 0px;
+	}
+	to {
+		background-position: -1357px 0px;
+	}
+}
+
+@keyframes running {
+	from {
+		background-position: -39px 0px;
+	}
+	to {
+		background-position: -1357px 0px;
+	}
+}
