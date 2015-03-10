@@ -58,20 +58,20 @@ p.centers-text span.center-block {
 	background: url('../assets/images/unicorn_reverse_sprite.png') -1438 -18;
 }
 
-.unicorn.running {
-	background: url('../assets/images/unicorn_running_sprite.png');
-	-webkit-animation-name: running;
+.unicorn.walking {
+	background: url('../assets/images/unicorn_walking_sprite.png');
+	-webkit-animation-name: unicorn-walking;
 	-webkit-animation-duration: .7s;
 	-webkit-animation-timing-function: steps(8);
 	-webkit-animation-iteration-count: infinite;
 }
 
-.unicorn.running.reverse {
-	background: url('../assets/images/unicorn_running_reverse_sprite.png');
+.unicorn.walking.reverse {
+	background: url('../assets/images/unicorn_walking_reverse_sprite.png');
 	-webkit-animation-direction: reverse;
 }
 
-@-webkit-keyframes running {
+@-webkit-keyframes unicorn-walking {
 	from {
 		background-position: -39px 0px;
 	}
@@ -79,16 +79,7 @@ p.centers-text span.center-block {
 		background-position: -1357px 0px;
 	}
 }
-@-moz-keyframes running {
-	from {
-		background-position: -39px 0px;
-	}
-	to {
-		background-position: -1357px 0px;
-	}
-}
-
-@-o-keyframes running {
+@-moz-keyframes unicorn-walking {
 	from {
 		background-position: -39px 0px;
 	}
@@ -97,11 +88,55 @@ p.centers-text span.center-block {
 	}
 }
 
-@keyframes running {
+@-o-keyframes unicorn-walking {
 	from {
 		background-position: -39px 0px;
 	}
 	to {
 		background-position: -1357px 0px;
+	}
+}
+
+@keyframes unicorn-walking {
+	from {
+		background-position: -39px 0px;
+	}
+	to {
+		background-position: -1357px 0px;
+	}
+}
+
+
+.koala {
+	height:68px;
+	width:48px;
+	background: url('../assets/images/koala_sprite.png') -133 0;
+	position:absolute;
+	bottom:6px;
+	left: 0;
+}
+
+.koala.walking {
+	-webkit-animation-name: koala-walking;
+	-webkit-animation-duration: .9s;
+	-webkit-animation-timing-function: steps(7);
+	-webkit-animation-iteration-count: infinite;
+}
+
+@keyframes koala-walking {
+	from {
+		background-position: -12px 0px;
+	}
+	to {
+		background-position: -348px 0px;
+	}
+}
+
+@-webkit-keyframes koala-walking {
+	from {
+		background-position: -16px 0px;
+	}
+	to {
+		background-position: -352px 0px;
 	}
 }

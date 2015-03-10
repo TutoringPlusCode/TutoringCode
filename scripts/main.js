@@ -1,46 +1,78 @@
 /**
- * Unicorn
+ * Utils
  */
 
 function setAttributes(model, options) {
 	_.extend(model, options)
 }
 
-function Unicorn(options) {
-	var defaults = {
-		x: 0,
-		y: 0,
-		initialCssClass: 'unicorn',
-		index: Counter.incrementCount('Unicorn')
-	};
+/**
+ * Animal
+ */
+
+function Animal(defaults, options) {
 	options = _.extend(defaults, options);
 	setAttributes(this, options);
-	this.setElement();
 }
 
-Unicorn.prototype.setElement = function() {
+Animal.prototype.addClass = function(className) {
+	$('#' + this.getId()).addClass(className || '');
+};
+
+Animal.prototype.removeClass = function(className) {
+	$('#' + this.getId()).removeClass(className || '');
+};
+
+Animal.prototype.manageClasses = function(options) {
+	this.addClass(options.add);
+	this.removeClass(options.remove);
+};
+
+Animal.prototype.setElement = function() {
 	console.log("this.getId in setElement", this.getId);
 	var html = '<div id="' + this.getId() + '" class="' + this.initialCssClass + '"></div>';
 	$('#canvas').append(html);
 };
 
-Unicorn.prototype.getId = function() {
-	return ('unicorn-' + String(this.index));
+Animal.prototype.getId = function() {
+	return (this.idBase + String(this.index));
 };
 
-Unicorn.prototype.addClass = function(className) {
-	$('#' + this.getId()).addClass(className || '');
-};
+/**
+ * Unicorn
+ */
 
-Unicorn.prototype.removeClass = function(className) {
-	$('#' + this.getId()).removeClass(className || '');
-};
+function Unicorn(options) {
+	var defaults = {
+		x: 0,
+		y: 0,
+		initialCssClass: 'unicorn',
+		index: Counter.incrementCount('Unicorn'),
+		idBase: 'unicorn-'
+	};
+	Animal.call(this, defaults, options);
+	this.setElement();
+}
 
-Unicorn.prototype.manageClasses = function(options) {
-	this.addClass(options.add);
-	this.removeClass(options.remove);
-};
+Unicorn.prototype = new Animal();
 
+/**
+ *  Koala
+ */
+
+function Koala(options) {
+	var defaults = {
+		x: 0,
+		y: 0,
+		initialCssClass: 'koala',
+		index: Counter.incrementCount('Koala'),
+		idBase: 'koala-'
+	};
+	Animal.call(this, defaults, options)
+	this.setElement();	
+}
+
+Koala.prototype = new Animal();
 
 /**
  * Counter
@@ -63,7 +95,6 @@ var Counter = (function() {
 	}
 })();
 
-
 /**
  * Runtime
  */
@@ -73,17 +104,21 @@ $(document).ready(function() {
 		initialCssClass: 'unicorn'
 	});
 
+	var myKoala = new Koala({
+		initialCssClass: 'koala walking'
+	});
+
 	$(document).keydown(function (event) {
 		switch(event.which) {
 			case 39:
 				myUnicorn.manageClasses({
-					add: 'running',
+					add: 'walking',
 					remove: 'reverse'
 				});
 				break;
 			case 37:
 				myUnicorn.manageClasses({
-					add: 'reverse running'
+					add: 'reverse walking'
 				});
 				break;
 		}
@@ -93,12 +128,12 @@ $(document).ready(function() {
 		switch(event.which) {
 			case 39:
 				myUnicorn.manageClasses({
-					remove: 'running'
+					remove: 'walking'
 				});
 				break;
 			case 37:
 				myUnicorn.manageClasses({
-					remove: 'running'
+					remove: 'walking'
 				});
 				break;
 		}
