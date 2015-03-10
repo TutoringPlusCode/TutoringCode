@@ -68,13 +68,14 @@ Unicorn.prototype = new Animal();
 Unicorn.prototype.fire = function fire() {
 	if (!this.isFiring) {
 		var $elem = this.element().find('#fire');
+		$elem.removeClass('firing');
 		$elem.addClass('firing');
 		this.isFiring = true;
 		var that = this;
 		setTimeout(function() {
 			$elem.removeClass('firing');
 			that.isFiring = false;
-		}, 750);
+		}, 700);
 	}
 }
 
