@@ -71,6 +71,46 @@ p.centers-text span.center-block {
 	-webkit-animation-direction: reverse;
 }
 
+.unicorn #fire {
+	width: 100px;
+	height: 22px;
+	left: 83px;
+	top: 13px;
+	position: absolute;
+	background: url('../assets/images/fire_animated.png');
+}
+
+.unicorn.walking #fire {
+	left: 108px;
+	top: 23px;
+}
+
+.unicorn.reverse #fire {
+	left: -48px;
+	top: 13px;
+	background: url('../assets/images/fire_animated_left.png');
+}
+
+.unicorn.reverse.walking #fire {
+	left: -65px;
+	top: 23px;
+}
+
+.unicorn #fire.firing {
+	-webkit-animation-name: unicorn-fire;
+	-webkit-animation-duration: .7s;
+	-webkit-animation-timing-function: steps(24);
+	-webkit-animation-iteration-count: 1;
+}
+@-webkit-keyframes unicorn-fire {
+	from {
+		background-position: -5px -35px;
+	}
+	to {
+		background-position: -5px -2495px;
+	}
+}
+
 @-webkit-keyframes unicorn-walking {
 	from {
 		background-position: -39px 0px;
