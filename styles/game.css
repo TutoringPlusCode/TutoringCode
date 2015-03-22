@@ -1,182 +1,188 @@
 body {
-	width:100%;
-	height:100%;
-	padding: 0;
-	margin: 0;
-	background: url('../assets/images/diagonal_pin_stripes_bg.gif') repeat;
+    width:100%;
+    height:100%;
+    padding: 0;
+    margin: 0;
+    background: url('../assets/images/diagonal_pin_stripes_bg.gif') repeat;
 }
 
 p.centers-text {
-	margin: 0;
-	width: 100%;
-	position: absolute;
-	top: 3px;
-	text-align: center;
+    margin: 0;
+    width: 100%;
+    position: absolute;
+    top: 3px;
+    text-align: center;
 }
 
 p.centers-text span.center-block {
-	display: inline-block;
-	position: relative;
+    display: inline-block;
+    position: relative;
 }
 
 #header {
-	height: 40px;
+    height: 40px;
 }
 
 #header .center-block {
-	font-family: impact;
-	background-color: white;
-	height: inherit;
-	font-size: 31px;
-	color: hotpink;
-	border: 2px solid black;
-	padding-left: 5px;
-	padding-right: 5px;
+    font-family: impact;
+    background-color: white;
+    height: inherit;
+    font-size: 31px;
+    color: hotpink;
+    border: 2px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #canvas {
-	height: calc(100% - 80px - 50px);
-	width: calc(100% - 40px - 8px - 8px);
-	margin-left: 20px;
-	margin-right: 20px;
-	background-color:white;
-	position:absolute;
-	top:50px;
-	border: 8px black solid;
+    height: calc(100% - 80px - 50px);
+    width: calc(100% - 40px - 8px - 8px);
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color:white;
+    position:absolute;
+    top:50px;
+    border: 8px black solid;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .unicorn {
-	height:85px;
-	width:150px;
-	background: url('../assets/images/unicorn_sprite.png') 2 -18;
-	position:absolute;
-	bottom:0px;
-	left: calc(50% - 75px);
+    height:85px;
+    width:150px;
+    background: url('../assets/images/unicorn_sprite.png') 2 -18;
+    position:absolute;
+    bottom:0px;
+    left: calc(50% - 75px);
+    z-index: -1;
 }
 
 .unicorn.reverse {
-	background: url('../assets/images/unicorn_reverse_sprite.png') -1438 -18;
+    background: url('../assets/images/unicorn_reverse_sprite.png') -1438 -18;
 }
 
 .unicorn.walking {
-	background: url('../assets/images/unicorn_walking_sprite.png');
-	-webkit-animation-name: unicorn-walking;
-	-webkit-animation-duration: .7s;
-	-webkit-animation-timing-function: steps(8);
-	-webkit-animation-iteration-count: infinite;
+    background: url('../assets/images/unicorn_walking_sprite.png');
+    -webkit-animation-name: unicorn-walking;
+    -webkit-animation-duration: .7s;
+    -webkit-animation-timing-function: steps(8);
+    -webkit-animation-iteration-count: infinite;
 }
 
 .unicorn.walking.reverse {
-	background: url('../assets/images/unicorn_walking_reverse_sprite.png');
-	-webkit-animation-direction: reverse;
+    background: url('../assets/images/unicorn_walking_reverse_sprite.png');
+    -webkit-animation-direction: reverse;
 }
 
 .unicorn #fire {
-	width: 100px;
-	height: 22px;
-	left: 83px;
-	top: 13px;
-	position: absolute;
-	background: url('../assets/images/fire_animated.png');
+    width: 100px;
+    height: 22px;
+    left: 83px;
+    top: 13px;
+    position: absolute;
+    background: url('../assets/images/fire_animated.png');
 }
 
 .unicorn.walking #fire {
-	left: 108px;
-	top: 23px;
+    left: 108px;
+    top: 23px;
 }
 
 .unicorn.reverse #fire {
-	left: -48px;
-	top: 13px;
-	background: url('../assets/images/fire_animated_left.png');
+    left: -48px;
+    top: 13px;
+    background: url('../assets/images/fire_animated_left.png');
 }
 
 .unicorn.reverse.walking #fire {
-	left: -65px;
-	top: 23px;
+    left: -65px;
+    top: 23px;
 }
 
 .unicorn #fire.firing {
-	-webkit-animation-name: unicorn-fire;
-	-webkit-animation-duration: .7s;
-	-webkit-animation-timing-function: steps(24);
-	-webkit-animation-iteration-count: 1;
+    -webkit-animation-name: unicorn-fire;
+    -webkit-animation-duration: .7s;
+    -webkit-animation-timing-function: steps(24);
+    -webkit-animation-iteration-count: 1;
 }
 @-webkit-keyframes unicorn-fire {
-	from {
-		background-position: -5px -35px;
-	}
-	to {
-		background-position: -5px -2495px;
-	}
+    from {
+        background-position: -5px -35px;
+    }
+    to {
+        background-position: -5px -2495px;
+    }
 }
 
 @-webkit-keyframes unicorn-walking {
-	from {
-		background-position: -39px 0px;
-	}
-	to {
-		background-position: -1357px 0px;
-	}
+    from {
+        background-position: -39px 0px;
+    }
+    to {
+        background-position: -1357px 0px;
+    }
 }
 @-moz-keyframes unicorn-walking {
-	from {
-		background-position: -39px 0px;
-	}
-	to {
-		background-position: -1357px 0px;
-	}
+    from {
+        background-position: -39px 0px;
+    }
+    to {
+        background-position: -1357px 0px;
+    }
 }
 
 @-o-keyframes unicorn-walking {
-	from {
-		background-position: -39px 0px;
-	}
-	to {
-		background-position: -1357px 0px;
-	}
+    from {
+        background-position: -39px 0px;
+    }
+    to {
+        background-position: -1357px 0px;
+    }
 }
 
 @keyframes unicorn-walking {
-	from {
-		background-position: -39px 0px;
-	}
-	to {
-		background-position: -1357px 0px;
-	}
+    from {
+        background-position: -39px 0px;
+    }
+    to {
+        background-position: -1357px 0px;
+    }
 }
 
 
 .koala {
-	height:68px;
-	width:48px;
-	background: url('../assets/images/robo_koala_sprite.png') -133 0;
-	position:absolute;
-	bottom:6px;
-	left: 0;
+    height:68px;
+    width:48px;
+    background: url('../assets/images/robo_koala_sprite.png') -16 67;
+    position:absolute;
+    bottom:6px;
+    left: -50px;
+    z-index: -1;
 }
 
 .koala.walking {
-	-webkit-animation-name: koala-walking;
-	-webkit-animation-duration: .9s;
-	-webkit-animation-timing-function: steps(7);
-	-webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: koala-walking;
+    -webkit-animation-duration: .9s;
+    -webkit-animation-timing-function: steps(7);
+    -webkit-animation-iteration-count: infinite;
+    -webkit-transition: 45s linear;
+    -webkit-transform: translate(3000px, 0px);
 }
 
 @keyframes koala-walking {
-	from {
-		background-position: -12px 0px;
-	}
-	to {
-		background-position: -348px 0px;
-	}
+    from {
+        background-position: -12px 0px;
+    }
+    to {
+        background-position: -348px 0px;
+    }
 }
 
 @-webkit-keyframes koala-walking {
-	from {
-		background-position: -16px 0px;
-	}
-	to {
-		background-position: -352px 0px;
-	}
+    from {
+        background-position: -16px 0px;
+    }
+    to {
+        background-position: -352px 0px;
+    }
 }
