@@ -169,12 +169,39 @@ p.centers-text span.center-block {
     -webkit-animation-duration: .9s;
     -webkit-animation-timing-function: steps(7);
     -webkit-animation-iteration-count: infinite;
-/*    -webkit-transition: 45s linear;
-    -webkit-transform: translate(3000px, 0px);
-*/}
+}
 
 .koala.reverse.walking {
     -webkit-animation-name: koala-reverse-walking;
+}
+
+.koala.exploding, .koala.reverse.exploding, .koala.walking.exploding,
+.koala.reverse.walking.exploding {
+    background: none;
+    height: 60px;
+    width: 60px;
+    -webkit-animation-name: exploding;
+    -webkit-animation-duration: .8s;
+    -webkit-animation-timing-function: steps(15);
+    -webkit-animation-iteration-count: 1;
+}
+
+@-webkit-keyframes exploding {
+    from {
+        background: url('../assets/images/explosion.png') 2 0;
+    }
+    to {
+        background: url('../assets/images/explosion.png') -961 0;
+    }
+}
+
+@keyframes exploding {
+    from {
+        background: url('../assets/images/explosion.png') 0 0;
+    }
+    to {
+        background: url('../assets/images/explosion.png') -963 0;
+    }
 }
 
 @keyframes koala-walking {

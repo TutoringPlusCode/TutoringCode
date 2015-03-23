@@ -1,4 +1,10 @@
 /**
+ * Globals
+ */
+
+var koalas = [];
+
+/**
  * Utils
  */
 
@@ -114,12 +120,36 @@ Unicorn.prototype.fire = function fire() {
         $elem.addClass('firing');
         this.isFiring = true;
         var that = this;
+        function getExploder(model) {
+            model.manageExplosions();
+        }
+        setTimeout(getExploder(that), 500);
         setTimeout(function() {
+            console.log("inside setTimeout");
             $elem.removeClass('firing');
             that.isFiring = false;
         }, 700);
+        console.log("immediately after setTimeout");
     }
-}
+};
+
+Unicorn.prototype.fireElement = function fireElement() {
+    return this.element().children('#fire');
+};
+
+Unicorn.prototype.manageExplosions = function manageExplosions() {
+    var fireLeft = this.fireElement().offset().left;
+    var fireWidth = this.fireElement().width();
+    var fireRight = fireLeft + fireWidth;
+    _.each(koalas, function(koala) {
+        var koalaLeft = koala.element().offset().left;
+        var koalaWidth = koala.element().width();
+        var koalaRight = koalaLeft + koalaWidth;
+        if ((koalaRight - 10) > fireLeft && (koalaLeft + 10) < fireRight) {
+            koala.explode();
+        }
+    });
+};
 
 /**
  *  Koala
@@ -145,7 +175,6 @@ function getKoalaAnimations() {
 
             koala.reset();
 
-            console.log("hit random-walk", new Date().valueOf());
             var delay = 5000;
             var wait = (Math.floor(Math.random() * 5000));
             setTimeout(function() {
@@ -163,14 +192,19 @@ Koala.prototype.reset = function reset() {
     var bool = randomBoolean();
     if (bool) {
         this.element().addClass('reverse');
+        this.element().removeClass('exploding');
         this.element().css('left', String($('#canvas').width() + 50) + 'px');
         this.direction = -1;
     }
     else {
-        this.element().removeClass('reverse');
+        this.element().removeClass('reverse exploding');
         this.element().css('left', '-50px');
         this.direction = 1;
     }
+}
+
+Koala.prototype.explode = function explode() {
+    this.element().stop().addClass('exploding');
 }
 
 /**
@@ -201,7 +235,6 @@ var Counter = (function() {
 
 function getKoalaAnimator(koala) {
     return function() {
-        console.log("begin setTimeout", koala.getId());
         koala.setAnimationLoop('random-walk', 45000, true);        
     }
 }
@@ -210,17 +243,16 @@ $(document).ready(function() {
     var myUnicorn = new Unicorn({
         initialCssClass: 'unicorn'
     });
-    var koalas = [];
     var numberOfKoalas = 15
     for(i in _.range(0, numberOfKoalas)) {
-        console.log("begin loop");
         var koala = new Koala({
             initialCssClass: 'koala walking'
         });
+        koalas.push(koala);
         var timeoutAmount = Math.floor(Math.random() * 45000);
-        console.log("timeoutAmount", timeoutAmount);
         setTimeout(getKoalaAnimator(koala), timeoutAmount);
     }
+
 
     $(document).keydown(function (event) {
         switch(event.which) {
