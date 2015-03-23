@@ -50,7 +50,8 @@ p.centers-text span.center-block {
 .unicorn {
     height:85px;
     width:150px;
-    background: url('../assets/images/unicorn_sprite.png') 2 -18;
+    background: url('../assets/images/unicorn_sprite.png');
+    background-position: 2px -18px;
     position:absolute;
     bottom:0px;
     left: calc(50% - 75px);
@@ -58,7 +59,8 @@ p.centers-text span.center-block {
 }
 
 .unicorn.reverse {
-    background: url('../assets/images/unicorn_reverse_sprite.png') -1438 -18;
+    background: url('../assets/images/unicorn_reverse_sprite.png');
+    background-position: -1438px -18px;
 }
 
 .unicorn.walking {
@@ -153,7 +155,8 @@ p.centers-text span.center-block {
 .koala {
     height:67px;
     width:48px;
-    background: url('../assets/images/robo_koala_sprite.png') -16 67;
+    background: url('../assets/images/robo_koala_sprite.png');
+    background-position: -16px 67px;
     position:absolute;
     bottom:6px;
     left: -50px;
@@ -188,19 +191,23 @@ p.centers-text span.center-block {
 
 @-webkit-keyframes exploding {
     from {
-        background: url('../assets/images/explosion.png') 2 0;
+        background: url('../assets/images/explosion.png');
+        background-position: 2px 0px;
     }
     to {
-        background: url('../assets/images/explosion.png') -961 0;
+        background: url('../assets/images/explosion.png');
+        background-position: -961px 0px;
     }
 }
 
 @keyframes exploding {
     from {
-        background: url('../assets/images/explosion.png') 0 0;
+        background: url('../assets/images/explosion.png');
+        background-position: 2px 0px;
     }
     to {
-        background: url('../assets/images/explosion.png') -963 0;
+        background: url('../assets/images/explosion.png');
+        background-position: -961px 0px;
     }
 }
 
