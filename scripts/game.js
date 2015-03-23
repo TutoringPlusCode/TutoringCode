@@ -135,16 +135,22 @@ Unicorn.prototype.fireElement = function fireElement() {
     return this.element().children('#fire');
 };
 
+function koalaInRange(fire, koala) {
+    return (koala.right - 10) > fire.left && (koala.left + 10) < fire.right;
+}
+
 Unicorn.prototype.manageExplosions = function manageExplosions() {
-    var fireLeft = this.fireElement().offset().left;
-    var fireWidth = this.fireElement().width();
-    var fireRight = fireLeft + fireWidth;
-    _.each(koalas, function(koala) {
-        var koalaLeft = koala.element().offset().left;
-        var koalaWidth = koala.element().width();
-        var koalaRight = koalaLeft + koalaWidth;
-        if ((koalaRight - 10) > fireLeft && (koalaLeft + 10) < fireRight) {
-            koala.explode();
+    var fire = {};
+    fire.left = this.fireElement().offset().left;
+    fire.width = this.fireElement().width();
+    fire.right = fire.left + fire.width;
+    _.each(koalas, function(koalaModel) {
+        var koala = {};
+        koala.left = koalaModel.element().offset().left;
+        koala.width = koalaModel.element().width();
+        koala.right = koala.left + koala.width;
+        if ( koalaInRange(fire, koala) ) {
+            koalaModel.explode();
         }
     });
 };

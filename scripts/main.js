@@ -4,7 +4,7 @@
 
 $(document).ready(function() {
 	$("button").click(function() {
-		$("h3").toggleClass("yellow");
+		$("h3").toggleClass("hidden");
 	});
 
 });
