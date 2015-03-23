@@ -125,11 +125,9 @@ Unicorn.prototype.fire = function fire() {
         }
         setTimeout(getExploder(that), 500);
         setTimeout(function() {
-            console.log("inside setTimeout");
             $elem.removeClass('firing');
             that.isFiring = false;
         }, 700);
-        console.log("immediately after setTimeout");
     }
 };
 
