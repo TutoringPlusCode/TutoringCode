@@ -136,7 +136,7 @@ Unicorn.prototype.fireElement = function fireElement() {
 };
 
 function koalaInRange(fire, koala) {
-    return (koala.right - 10) > fire.left && (koala.left + 10) < fire.right;
+    return false;
 }
 
 Unicorn.prototype.manageExplosions = function manageExplosions() {
