@@ -1,15 +1,13 @@
 /**
- * Constants
- */
-
-var animationTime = 50;
-
-/**
  * Utils
  */
 
 function setAttributes(model, options) {
     _.extend(model, options)
+}
+
+function randomBoolean() {
+    return Math.random() < 0.5;
 }
 
 /**
@@ -49,15 +47,19 @@ Animal.prototype.element = function() {
     return $('#' + this.getId());
 };
 
-Animal.prototype.setAnimationLoop = function(animationName) {
+Animal.prototype.setAnimationLoop = function(animationName, animationTime, immediate) {
+    immediate = (immediate || false);
     var that = this;
     var animation = (this.animations || {})[animationName]
     if (animation && !this.currentAnimation) {
         that.currentAnimation = animationName;
+        if (immediate) {
+            animation(that, animationTime);
+        }
         that.intervalId = setInterval(function() {
             // Every animation function should have the instance on which it is run as parameter
             if (that.currentAnimation === animationName) {
-                animation(that);
+                animation(that, animationTime);
             }
         }, (animationTime + 5)); // We give interval 5 milliseconds to run non-animation code.        
     }
@@ -90,12 +92,12 @@ function Unicorn(options) {
 
 function getUnicornAnimations() {
     return {
-        'move-right': function(unicorn) {
+        'move-right': function(unicorn, animationTime) {
             unicorn.element().animate({
                 left: '+=10'
             }, animationTime, 'linear');
         },
-        'move-left': function(unicorn) {
+        'move-left': function(unicorn, animationTime) {
             unicorn.element().animate({
                 left: '-=10'
             }, animationTime, 'linear');
@@ -127,6 +129,8 @@ function Koala(options) {
     var defaults = {
         x: 0,
         y: 0,
+        animations: getKoalaAnimations(),
+        direction: 1,
         initialCssClass: 'koala',
         index: Counter.incrementCount('Koala'),
         idBase: 'koala-'
@@ -135,7 +139,39 @@ function Koala(options) {
     this.setElement();  
 }
 
+function getKoalaAnimations() {
+    return {
+        'random-walk': function(koala, animationTime) {
+
+            koala.reset();
+
+            console.log("hit random-walk", new Date().valueOf());
+            var delay = 5000;
+            var wait = (Math.floor(Math.random() * 5000));
+            setTimeout(function() {
+                koala.element().animate({
+                    left: ((koala.direction > 0 ? '+=' : '-=') + String(3000))
+                }, (animationTime - delay), 'linear');
+            }, wait);
+        }
+    };
+}
+
 Koala.prototype = new Animal();
+
+Koala.prototype.reset = function reset() {
+    var bool = randomBoolean();
+    if (bool) {
+        this.element().addClass('reverse');
+        this.element().css('left', String($('#canvas').width() + 50) + 'px');
+        this.direction = -1;
+    }
+    else {
+        this.element().removeClass('reverse');
+        this.element().css('left', '-50px');
+        this.direction = 1;
+    }
+}
 
 /**
  * Counter
@@ -163,14 +199,28 @@ var Counter = (function() {
  * Runtime
  */
 
+function getKoalaAnimator(koala) {
+    return function() {
+        console.log("begin setTimeout", koala.getId());
+        koala.setAnimationLoop('random-walk', 45000, true);        
+    }
+}
+
 $(document).ready(function() {
     var myUnicorn = new Unicorn({
         initialCssClass: 'unicorn'
     });
-
-    var myKoala = new Koala({
-        initialCssClass: 'koala'
-    });
+    var koalas = [];
+    var numberOfKoalas = 15
+    for(i in _.range(0, numberOfKoalas)) {
+        console.log("begin loop");
+        var koala = new Koala({
+            initialCssClass: 'koala walking'
+        });
+        var timeoutAmount = Math.floor(Math.random() * 45000);
+        console.log("timeoutAmount", timeoutAmount);
+        setTimeout(getKoalaAnimator(koala), timeoutAmount);
+    }
 
     $(document).keydown(function (event) {
         switch(event.which) {
@@ -180,14 +230,14 @@ $(document).ready(function() {
                     remove: 'reverse'
                 });
                 myUnicorn.direction = 1;
-                myUnicorn.setAnimationLoop('move-right');
+                myUnicorn.setAnimationLoop('move-right', 50);
                 break;
             case 37: // left arrow
                 myUnicorn.manageClasses({
                     add: 'reverse walking'
                 });
                 myUnicorn.direction = -1;
-                myUnicorn.setAnimationLoop('move-left');
+                myUnicorn.setAnimationLoop('move-left', 50);
                 break;
             case 70: // f, or 'fire'
                 myUnicorn.fire();
@@ -211,9 +261,5 @@ $(document).ready(function() {
                 break;
         }
     });
-
-    setTimeout(function() {
-       $('.koala').addClass('walking');
-    }, 10);
 
 });

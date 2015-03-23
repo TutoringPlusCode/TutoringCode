@@ -151,7 +151,7 @@ p.centers-text span.center-block {
 
 
 .koala {
-    height:68px;
+    height:67px;
     width:48px;
     background: url('../assets/images/robo_koala_sprite.png') -16 67;
     position:absolute;
@@ -160,13 +160,21 @@ p.centers-text span.center-block {
     z-index: -1;
 }
 
+.koala.reverse {
+    bottom:4px;
+}
+
 .koala.walking {
     -webkit-animation-name: koala-walking;
     -webkit-animation-duration: .9s;
     -webkit-animation-timing-function: steps(7);
     -webkit-animation-iteration-count: infinite;
-    -webkit-transition: 45s linear;
+/*    -webkit-transition: 45s linear;
     -webkit-transform: translate(3000px, 0px);
+*/}
+
+.koala.reverse.walking {
+    -webkit-animation-name: koala-reverse-walking;
 }
 
 @keyframes koala-walking {
@@ -184,5 +192,23 @@ p.centers-text span.center-block {
     }
     to {
         background-position: -352px 0px;
+    }
+}
+
+@-webkit-keyframes koala-reverse-walking {
+    from {
+        background-position: -17px -68px;
+    }
+    to {
+        background-position: -353px -68px;
+    }
+}
+
+@keyframes koala-reverse-walking {
+    from {
+        background-position: -17px -68px;
+    }
+    to {
+        background-position: -353px -68px;
     }
 }
